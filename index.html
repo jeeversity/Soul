@@ -2,123 +2,77 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Zoya - My Everything</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>For Zoya ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:#fff5f8;color:#333;overflow-x:hidden}
-#lock{position:fixed;inset:0;background:radial-gradient(circle at center,#ff2e63,#c9184a);display:flex;align-items:center;justify-content:center;z-index:9999;transition:0.8s}
-.lock-box{background:rgba(255,255,255,0.95);padding:40px 35px;border-radius:30px;text-align:center;box-shadow:0 25px 80px rgba(0,0,0,0.3);width:90%;max-width:360px;backdrop-filter:blur(10px)}
-.lock-box h1{font-family:'Dancing Script',cursive;font-size:38px;color:#ff2e63}
-.lock-box p{font-size:13px;opacity:0.7;margin:8px 0 18px}
-.lock-box input{width:100%;padding:13px;border:2px solid #ffd1dc;border-radius:30px;text-align:center;outline:none;font-size:15px}
-.lock-box button{width:100%;margin-top:14px;padding:13px;background:#ff2e63;color:#fff;border:none;border-radius:30px;font-weight:600;cursor:pointer;font-size:15px;transition:0.3s}
-.lock-box button:hover{transform:scale(1.03)}
+body{font-family:'Montserrat',sans-serif;background:#fff5f8}
+#lock{position:fixed;inset:0;background:#ff2e63;display:flex;align-items:center;justify-content:center;z-index:9999}
+.lock-box{background:white;padding:35px;border-radius:25px;text-align:center;width:90%;max-width:340px}
+.lock-box h1{font-family:'Dancing Script',cursive;color:#ff2e63;font-size:36px}
+.lock-box input{width:100%;padding:12px;border:2px solid #ffd1dc;border-radius:30px;text-align:center;margin-top:12px;outline:none}
+.lock-box button{width:100%;margin-top:12px;padding:12px;background:#ff2e63;color:white;border:none;border-radius:30px;font-weight:600;cursor:pointer}
 #app{display:none}
-.hero{height:92vh;background:linear-gradient(180deg,rgba(255,46,99,0.85),rgba(255,143,171,0.75)),url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:20px;position:relative}
-.hero-content h1{font-family:'Dancing Script',cursive;font-size:56px;line-height:1.1;text-shadow:0 4px 20px rgba(0,0,0,0.3)}
-.hero-content p{margin-top:15px;font-size:16px;opacity:0.95;font-weight:300}
-.hero-btn{margin-top:25px;padding:12px 28px;background:white;color:#ff2e63;border:none;border-radius:30px;font-weight:600;cursor:pointer;box-shadow:0 8px 25px rgba(0,0,0,0.2)}
-.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);display:flex;gap:8px;padding:12px;overflow-x:auto;justify-content:center;border-bottom:1px solid #ffe1e8}
-.nav button{padding:9px 18px;border:none;background:white;border-radius:30px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,0.07);font-weight:500;white-space:nowrap;transition:0.3s}
-.nav button.active{background:#ff2e63;color:white}
-.section{max-width:850px;margin:30px auto;padding:0 18px}
-.card{background:white;border-radius:28px;padding:28px;box-shadow:0 12px 40px rgba(255,46,99,0.08);margin-bottom:22px}
-.card h2{font-family:'Dancing Script',cursive;font-size:34px;color:#ff2e63;text-align:center;margin-bottom:16px}
-.letter{border:2px dashed #ffb3c6;border-radius:20px;padding:22px;text-align:left;line-height:1.8;cursor:pointer}
-.letter-content{display:none;margin-top:15px}
+.hero{padding:50px 20px;text-align:center;background:linear-gradient(135deg,#ff2e63,#ff8fab);color:white}
+.hero h1{font-family:'Dancing Script',cursive;font-size:48px}
+.hero p{margin-top:10px;opacity:0.9}
+.container{max-width:800px;margin:0 auto;padding:20px}
+.card{background:white;border-radius:22px;padding:22px;box-shadow:0 8px 30px rgba(0,0,0,0.06);margin-bottom:20px}
+.card h2{font-family:'Dancing Script',cursive;color:#ff2e63;text-align:center;font-size:32px;margin-bottom:12px}
+#mainMap,#localMap{height:350px;width:100%;border-radius:18px;margin-top:12px}
+.letter{border:2px dashed #ffb3c6;padding:18px;border-radius:18px;cursor:pointer;line-height:1.7}
+.letter-content{display:none;margin-top:12px}
 .letter.open.letter-content{display:block}
-#mainMap,#localMap{height:380px;width:100%;border-radius:20px;z-index:1}
-.map-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-.map-card{background:#fff0f3;padding:14px;border-radius:16px;text-align:center;cursor:pointer;transition:0.3s}
-.map-card:hover{transform:translateY(-3px)}
-.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.g-item{aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:#ffe4ea;position:relative}
-.g-item img{width:100%;height:100%;object-fit:cover}
-.g-item span{position:absolute;bottom:8px;left:8px;background:rgba(0,0,0,0.5);color:white;padding:4px 10px;border-radius:20px;font-size:11px}
-.promise{padding:14px 16px;background:#fff0f3;border-radius:14px;margin-bottom:10px;border-left:4px solid #ff2e63;display:flex;gap:10px}
-.music-box{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,#fff0f3,#ffe4ea);padding:20px;border-radius:20px}
-.heartFx{position:fixed;pointer-events:none;animation:fly 4s linear forwards;z-index:200}
-@keyframes fly{0%{transform:translateY(100vh) scale(0)}20%{transform:translateY(80vh) scale(1)}100%{transform:translateY(-10vh) scale(1.2) rotate(20deg);opacity:0}}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gallery img{width:100%;height:180px;object-fit:cover;border-radius:14px}
+.promise{padding:12px;background:#fff0f3;border-left:4px solid #ff2e63;border-radius:10px;margin-bottom:10px}
 </style>
 </head>
 <body>
-<div id="lock"><div class="lock-box"><h1>For Zoya ❤️</h1><p>Enter our secret to unlock my heart</p><input id="pass" type="password" placeholder="zoya@"><button id="unlock">Unlock My World 🔓</button><p style="font-size:11px;margin-top:12px">Hint: zoya@</p></div></div>
+<div id="lock"><div class="lock-box"><h1>For Zoya ❤️</h1><p>Enter password</p><input id="pass" type="password" placeholder="zoya@"><button id="btn">Unlock</button></div></div>
 
 <div id="app">
-<div class="hero"><div class="hero-content"><h1>Tu hai toh<br>har raasta haseen hai</h1><p>Kota se Bihar tak, har mod pe sirf tera hi naam ❤️</p><button class="hero-btn" onclick="document.getElementById('nav').scrollIntoView({behavior:'smooth'})">Explore Our Story 👇</button></div></div>
+<div class="hero"><h1>Tu hai toh har raasta haseen hai ❤️</h1><p>Kota se Bihar tak - Vigyan Nagar se Kalpana tak</p></div>
 
-<div class="nav" id="nav">
-<button class="active" data-id="letter">💌 Letter</button>
-<button data-id="journey">🗺️ Kota-Bihar</button>
-<button data-id="local">📍 1.3km</button>
-<button data-id="gallery">🌸 Gallery</button>
-<button data-id="promises">🤞 Promises</button>
-</div>
+<div class="container">
+<div class="card"><h2>My Letter For You</h2><div class="letter" id="ltr"><b style="color:#ff2e63">👇 Click to open</b><div class="letter-content"><p>Zoya,</p><p>Kota ki galiyon se leke Bihar tak, dil hamesha tere paas hai. Ye website tere liye hai - kyunki tu special hai.</p><p>Hamesha tera ❤️</p></div></div></div>
 
-<div class="section">
-<div class="card" id="letter"><h2>My Dearest Zoya</h2><div class="letter" id="ltr"><div style="text-align:center"><b style="color:#ff2e63">Click to open my dil ki baat 👇</b><br><small style="opacity:0.6">Dil se likha hai</small></div><div class="letter-content">
-<p>Zoya,</p>
-<p>Jab se tu aayi hai, Kota ke har kone me bas teri khushboo hai. Vigyan Nagar ki shaam ho ya Kalpana Residency ki gali, har jagah tu yaad aati hai.</p>
-<p>Log kehte hain Kota se Bihar bahut door hai - 1100km! Par mere liye tu kabhi door thi hi nahi. Dil toh hamesha tere paas hi rehta hai.</p>
-<p>Ye website maine tere liye banayi hai, kyunki shabdon se zyada mehsoos karana chahta tha ki tu mere liye kitni special hai.</p>
-<p><b>Hamesha tera,<br>Tera wala ❤️</b></p>
-</div></div></div>
+<div class="card"><h2>Kota ❤️ Bihar - Ghuma Fira Rasta</h2><p style="text-align:center;font-size:12px;opacity:0.6">Straight nahi, har mod se hota hua</p><div id="mainMap"></div></div>
 
-<div class="card" id="journey"><h2>Kota ❤️ Bihar - Ghuma-Fira Pyaar Wala Rasta</h2><p style="text-align:center;font-size:12px;opacity:0.6">Seedha nahi, har mod se hota hua - jaise humara pyaar</p><div id="mainMap" style="margin-top:14px"></div><div class="map-grid"><div class="map-card" onclick="fly1(25.18,75.83)"><b>📍 Kota</b><br><small>Vigyan Nagar</small></div><div class="map-card" onclick="fly1(25.78,87.47)"><b>📍 Purnea</b><br><small>Bihar - Your Home</small></div></div></div>
 
-<div class="card" id="local"><h2>Humare Beech Sirf 1.3km ❤️</h2><p id="dist" style="text-align:center;color:#ff2e63;font-weight:700">Vigyan Nagar ↔ Kalpana Residency</p><p style="text-align:center;font-size:11px;opacity:0.6">E-53-A, Rd No.2, Behind Resonance, IPIA, 324005</p><div id="localMap" style="margin-top:14px"></div><div class="map-grid"><div class="map-card" onclick="fly2(25.1521808,75.8563008)"><b>Vigyan Nagar</b><br><small>324005</small></div><div class="map-card" onclick="fly2(25.13878,75.855691)"><b>Kalpana Residency</b><br><small>Tu yahan ❤️</small></div></div></div>
+<div class="card"><h2>Your Pics 🌸</h2><div class="gallery"><img src="https://picsum.photos/400/300?random=1"><img src="https://picsum.photos/400/300?random=2"><img src="https://picsum.photos/400/300?random=3"><img src="https://picsum.photos/400/300?random=4"></div></div>
 
-<div class="card" id="gallery"><h2>Your Beautiful World 🌸</h2><div class="gallery">
-<div class="g-item"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400"><span>My Cutie ❤️</span></div>
-<div class="g-item"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400"><span>Your Smile 😍</span></div>
-<div class="g-item"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400"><span>My Jaan 🌷</span></div>
-<div class="g-item"><img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400"><span>Forever You 💖</span></div>
-</div><p style="text-align:center;font-size:11px;opacity:0.6;margin-top:10px">Apni photos ka naam sana1.jpg etc rakh ke replace kar dena</p></div>
-
-<div class="card" id="promises"><h2>My Promises For You 🤞</h2><div class="promise">💖 <div><b>Hamesha saath</b><br><small>Chahe Kota-Bihar 1100km hi kyu na ho</small></div></div><div class="promise">🍔 <div><b>Khayal rakhunga</b><br><small>Time pe khana, time pe sona yaad dilaunga</small></div></div><div class="promise">🌙 <div><b>Good Night text pakka</b><br><small>Kitna bhi busy hu, bina bole nahi sounga</small></div></div><div class="promise">😘 <div><b>Kabhi akela nahi</b><br><small>Har mod pe main milunga</small></div></div></div>
-
-<div class="card" style="text-align:center"><h2 style="font-size:28px">Made with ❤️ for Zoya</h2><p style="opacity:0.6;font-size:12px">Vigyan Nagar se Purnea tak - 1.3km se 1100km tak, pyaar same hai</p></div>
-
+<div class="card"><h2>My Promises 🤞</h2><div class="promise">💖 Hamesha saath rahunga</div><div class="promise">🌙 Roz good night bolunga</div><div class="promise">🍔 Tera khayal rakhunga</div></div>
 </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-let m1,m2,init1=false,init2=false;
-document.getElementById('unlock').onclick=()=>{
- if(document.getElementById('pass').value==='zoya@'){
-   document.getElementById('lock').style.transform='translateY(-100%)';
-   setTimeout(()=>{document.getElementById('lock').style.display='none';document.getElementById('app').style.display='block';initMain();initLocal();hearts();},700);
- }else alert('Wrong - password: zoya@');
+document.getElementById('btn').onclick=()=>{
+ if(pass.value==='zoya@'){lock.style.display='none';app.style.display='block';setTimeout(()=>{initMain();initLocal();},300);}else alert('password zoya@');
 };
-document.getElementById('ltr').onclick=function(){this.classList.toggle('open')};
-function hearts(){setInterval(()=>{const h=document.createElement('div');h.className='heartFx';h.innerHTML='❤️';h.style.left=Math.random()*100+'vw';h.style.fontSize=(14+Math.random()*18)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),4000)},400)}
+ltr.onclick=function(){this.classList.toggle('open')};
+
+let m1,m2;
 function initMain(){
- if(init1)return; m1=L.map('mainMap').setView([25.6,81.5],5);
+ m1=L.map('mainMap').setView([25.6,81.5],5);
  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(m1);
- const ic=L.divIcon({html:'<div style="font-size:26px">❤️</div>',className:'',iconSize:[26,26],iconAnchor:[13,13]});
  const kota=[25.18,75.83], bihar=[25.78,87.47];
- L.marker(kota,{icon:ic}).addTo(m1).bindPopup('Kota, Rajasthan ❤️');
- L.marker(bihar,{icon:ic}).addTo(m1).bindPopup('Purnea, Bihar ❤️');
- let r=[];for(let i=0;i<=150;i++){let t=i/150;let lat=kota[0]+(bihar[0]-kota[0])*t+Math.sin(Math.PI*t)*2.1+Math.sin(t*15)*0.18;let lng=kota[1]+(bihar[1]-kota[1])*t+Math.cos(t*10)*0.15;r.push([lat,lng]);}
- L.polyline(r,{color:'#ff8fab',weight:12,opacity:0.3}).addTo(m1);
- L.polyline(r,{color:'#ff2e63',weight:5,opacity:0.95}).addTo(m1);
- m1.fitBounds([kota,bihar],{padding:[50,50]});init1=true;
+ L.marker(kota).addTo(m1).bindPopup('Kota ❤️');
+ L.marker(bihar).addTo(m1).bindPopup('Purnea Bihar ❤️');
+ let r=[];for(let i=0;i<=100;i++){let t=i/100;let lat=kota[0]+(bihar[0]-kota[0])*t+Math.sin(Math.PI*t)*2;let lng=kota[1]+(bihar[1]-kota[1])*t; r.push([lat,lng]);}
+ L.polyline(r,{color:'#ff2e63',weight:5}).addTo(m1);
+ m1.fitBounds([kota,bihar],{padding:[40,40]});
 }
 async function initLocal(){
- if(init2)return; m2=L.map('localMap').setView([25.145,75.856],14);
+ m2=L.map('localMap').setView([25.145,75.856],14);
  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(m2);
- const ic=L.divIcon({html:'<div style="font-size:24px">❤️</div>',className:'',iconSize:[24,24],iconAnchor:[12,12]});
  const v=[25.1521808,75.8563008], k=[25.13878,75.855691];
- L.marker(v,{icon:ic}).addTo(m2).bindPopup('Vigyan Nagar ❤️');
- L.marker(k,{icon:ic}).addTo(m2).bindPopup('Kalpana Residency<br>E-53-A, Behind Resonance ❤️');
- try{let url=`https://router.project-osrm.org/route/v1/driving/75.8563008,25.1521808;75.855691,25.13878?overview=full&geometries=geojson`;let res=await fetch(url);let d=await res.json();let coords=d.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);L.polyline(coords,{color:'#ff2e63',weight:5}).addTo(m2);document.getElementById('dist').innerText=`Road se ${(d.routes[0].distance/1000).toFixed(2)}km • ${Math.round(d.routes[0].duration/60)}min ❤️`;m2.fitBounds(coords,{padding:[40,40]});}catch(e){let line=L.polyline([v,k],{color:'#ff2e63',weight:4,dashArray:'10,10'}).addTo(m2);m2.fitBounds(line.getBounds(),{padding:[40,40]});}init2=true;
+ L.marker(v).addTo(m2).bindPopup('Vigyan Nagar');
+ L.marker(k).addTo(m2).bindPopup('Kalpana Residency');
+ try{let res=await fetch('https://router.project-osrm.org/route/v1/driving/75.8563008,25.1521808;75.855691,25.13878?overview=full&geometries=geojson');let d=await res.json();let coords=d.routes[0].geometry.coordinates.map(c=>[c[1],c[0]]);L.polyline(coords,{color:'#ff2e63',weight:5}).addTo(m2);dist.innerText=`Road se ${(d.routes[0].distance/1000).toFixed(2)}km ❤️`;m2.fitBounds(coords,{padding:[30,30]});}catch(e){L.polyline([v,k],{color:'#ff2e63',weight:4,dashArray:'10,10'}).addTo(m2);}
 }
-function fly1(a,b){m1&&m1.flyTo([a,b],6,{duration:1.2})}
-function fly2(a,b){m2&&m2.flyTo([a,b],17,{duration:1.2})}
-document.querySelectorAll('.nav button').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.id).scrollIntoView({behavior:'smooth',block:'start'});}});
 </script>
 </body>
 </html>
