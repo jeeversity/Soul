@@ -22,14 +22,23 @@ body{font-family:'Montserrat',sans-serif;background:#fff5f8;overflow-x:hidden}
 .card h2{font-family:'Dancing Script',cursive;color:#ff2e63;text-align:center;font-size:30px;margin-bottom:10px}
 .letter{font-size:13.5px;line-height:1.7;color:#555;text-align:center}
 .notes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.note{background:#fff0f3;border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden;border:1.5px solid #ffd1dc}
+.note{background:#fff0f3;border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden;border:1.5px solid #ffd1dc;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .note:active{transform:scale(.95)}
 .note b{color:#ff2e63;font-size:13px}
 .note span{font-size:11px;opacity:.7}
-.note.love{position:absolute;inset:0;background:#ff2e63;color:white;display:flex;align-items:center;justify-content:center;padding:12px;font-size:12px;font-weight:600;border-radius:16px;opacity:0;transform:scale(.8);transition:.4s;pointer-events:none}
-.note.open.love{opacity:1;transform:scale(1);animation:blink.5s ease 2}
+
+/* FIXED - ab pehle se show nahi hoga */
+.note.love{
+  position:absolute;inset:0;background:#ff2e63;color:white;
+  display:flex;align-items:center;justify-content:center;
+  padding:12px;font-size:12px;font-weight:600;border-radius:16px;
+  opacity:0;transform:scale(.8);transition:.4s;pointer-events:none
+}
+.note.open.love{
+  opacity:1;transform:scale(1);animation:blink.5s ease 2
+}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.heart{position:fixed;animation:float 4s linear forwards;pointer-events:none}
+.heart{position:fixed;animation:float 4s linear forwards;pointer-events:none;z-index:100}
 @keyframes float{0%{transform:translateY(100vh)}100%{transform:translateY(-10vh);opacity:0}}
 </style>
 </head>
@@ -49,12 +58,12 @@ body{font-family:'Montserrat',sans-serif;background:#fff5f8;overflow-x:hidden}
 
 <div class="card"><h2>Tap My Heart Notes 💌</h2><p style="text-align:center;font-size:11px;opacity:.6;margin-bottom:10px">Har note pe click kar, blink hoke love khulega</p>
 <div class="notes">
-<div class="note" onclick="openNote(this)"><b>🌙 Good Night</b><br><span>Tap me</span><div class="love">Roz raat ko sabse last khayal tu hi hoti hai ❤️</div></div>
-<div class="note" onclick="openNote(this)"><b>😘 Miss You</b><br><span>Tap me</span><div class="love">Har second tujhe miss karta hu, Zoya 🥺</div></div>
-<div class="note" onclick="openNote(this)"><b>🍔 Khana Khaya?</b><br><span>Tap me</span><div class="love">Apna khayal rakha kar, meri jaan ❤️</div></div>
-<div class="note" onclick="openNote(this)"><b>🌸 Cute Ho</b><br><span>Tap me</span><div class="love">Tu duniya ki sabse cute ladki hai 😍</div></div>
-<div class="note" onclick="openNote(this)"><b>🤞 Promise</b><br><span>Tap me</span><div class="love">Kabhi akela nahi chodunga, hamesha saath ❤️</div></div>
-<div class="note" onclick="openNote(this)"><b>💖 My Jaan</b><br><span>Tap me</span><div class="love">Tu meri jaan hai, Zoya. Forever ❤️</div></div>
+<div class="note" onclick="openNote(this)"><div><b>🌙 Good Night</b><br><span>Tap me</span></div><div class="love">Roz raat ko sabse last khayal tu hi hoti hai ❤️</div></div>
+<div class="note" onclick="openNote(this)"><div><b>😘 Miss You</b><br><span>Tap me</span></div><div class="love">Har second tujhe miss karta hu, Zoya 🥺</div></div>
+<div class="note" onclick="openNote(this)"><div><b>🍔 Khana Khaya?</b><br><span>Tap me</span></div><div class="love">Apna khayal rakha kar, meri jaan ❤️</div></div>
+<div class="note" onclick="openNote(this)"><div><b>🌸 Cute Ho</b><br><span>Tap me</span></div><div class="love">Tu duniya ki sabse cute ladki hai 😍</div></div>
+<div class="note" onclick="openNote(this)"><div><b>🤞 Promise</b><br><span>Tap me</span></div><div class="love">Kabhi akela nahi chodunga, hamesha saath ❤️</div></div>
+<div class="note" onclick="openNote(this)"><div><b>💖 My Jaan</b><br><span>Tap me</span></div><div class="love">Tu meri jaan hai, Zoya. Forever ❤️</div></div>
 </div>
 </div>
 
