@@ -12,27 +12,24 @@ body{font-family:'Montserrat',sans-serif;background:#fff5f8;overflow-x:hidden}
 .box h1{font-family:'Dancing Script',cursive;color:#ff2e63;font-size:36px}
 .box input{width:100%;padding:12px;border:2px solid #ffd1dc;border-radius:30px;text-align:center;margin-top:12px;outline:none}
 .box button{width:100%;padding:12px;background:#ff2e63;color:white;border:none;border-radius:30px;margin-top:12px;font-weight:600;cursor:pointer}
-#app{display:none;width:100%;min-height:100vh}
-.container{width:100%;max-width:1100px;margin:0 auto;padding:18px}
-.hero-photo{width:100%;height:62vh;min-height:480px;border-radius:28px;overflow:hidden;position:relative;box-shadow:0 15px 40px rgba(255,46,99,.25);background:#ffe4ea}
-.hero-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity 1.8s ease}
+#app{display:none;max-width:420px;margin:0 auto;padding:18px}
+.hero-photo{width:100%;height:520px;border-radius:30px;overflow:hidden;position:relative;box-shadow:0 15px 40px rgba(255,46,99,.25);background:#ffe4ea}
+.hero-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease}
 .hero-photo img.active{opacity:1}
-.name-tag{position:absolute;bottom:14px;left:14px;right:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);padding:14px;border-radius:18px;text-align:center;z-index:2}
+.name-tag{position:absolute;bottom:14px;left:14px;right:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);padding:14px;border-radius:18px;text-align:center}
 .name-tag h2{font-family:'Dancing Script',cursive;color:#ff2e63;font-size:28px}
 .card{background:white;border-radius:22px;padding:20px;margin-top:18px;box-shadow:0 8px 30px rgba(0,0,0,.05)}
 .card h2{font-family:'Dancing Script',cursive;color:#ff2e63;text-align:center;font-size:30px;margin-bottom:10px}
 .letter{font-size:13.5px;line-height:1.7;color:#555;text-align:center}
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
-@media(min-width:768px){.notes{grid-template-columns:repeat(3,1fr)}.hero-photo{height:70vh}}
-.note{background:#fff0f3;border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden;border:1.5px solid #ffd1dc;min-height:90px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.note{background:#fff0f3;border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden;border:1.5px solid #ffd1dc}
+.note:active{transform:scale(.95)}
 .note b{color:#ff2e63;font-size:13px}
 .note span{font-size:11px;opacity:.7}
-
-/* --- FIXED PART --- */
 .note.love{position:absolute;inset:0;background:#ff2e63;color:white;display:flex;align-items:center;justify-content:center;padding:12px;font-size:12px;font-weight:600;border-radius:16px;opacity:0;transform:scale(.8);transition:.4s;pointer-events:none}
-.note.open.love{opacity:1;transform:scale(1);animation:blinkPop.5s ease}
-@keyframes blinkPop{0%{transform:scale(.8)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
-.heart{position:fixed;animation:float 4s linear forwards;pointer-events:none;z-index:100}
+.note.open.love{opacity:1;transform:scale(1);animation:blink.5s ease 2}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.heart{position:fixed;animation:float 4s linear forwards;pointer-events:none}
 @keyframes float{0%{transform:translateY(100vh)}100%{transform:translateY(-10vh);opacity:0}}
 </style>
 </head>
@@ -40,7 +37,6 @@ body{font-family:'Montserrat',sans-serif;background:#fff5f8;overflow-x:hidden}
 <div id="lock"><div class="box"><h1>For Zoya ❤️</h1><p style="font-size:12px;opacity:.6;margin-top:6px">Our secret</p><input id="p" type="password" placeholder="zoya@"><button id="b">Unlock My Heart 🔓</button></div></div>
 
 <div id="app">
-<div class="container">
 <div class="hero-photo" id="slider">
 <img src="1.jpg" class="active" onerror="this.src='https://picsum.photos/500/700?random=1'">
 <img src="2.jpg" onerror="this.src='https://picsum.photos/500/700?random=2'">
@@ -53,17 +49,16 @@ body{font-family:'Montserrat',sans-serif;background:#fff5f8;overflow-x:hidden}
 
 <div class="card"><h2>Tap My Heart Notes 💌</h2><p style="text-align:center;font-size:11px;opacity:.6;margin-bottom:10px">Har note pe click kar, blink hoke love khulega</p>
 <div class="notes">
-<div class="note" onclick="openNote(this)"><div><b>🌙 Good Night</b><br><span>Tap me</span></div><div class="love">Roz raat ko sabse last khayal tu hi hoti hai ❤️</div></div>
-<div class="note" onclick="openNote(this)"><div><b>😘 Miss You</b><br><span>Tap me</span></div><div class="love">Har second tujhe miss karta hu, Zoya 🥺</div></div>
-<div class="note" onclick="openNote(this)"><div><b>🍔 Khana Khaya?</b><br><span>Tap me</span></div><div class="love">Apna khayal rakha kar, meri jaan ❤️</div></div>
-<div class="note" onclick="openNote(this)"><div><b>🌸 Cute Ho</b><br><span>Tap me</span></div><div class="love">Tu duniya ki sabse cute ladki hai 😍</div></div>
-<div class="note" onclick="openNote(this)"><div><b>🤞 Promise</b><br><span>Tap me</span></div><div class="love">Kabhi akela nahi chodunga, hamesha saath ❤️</div></div>
-<div class="note" onclick="openNote(this)"><div><b>💖 My Jaan</b><br><span>Tap me</span></div><div class="love">Tu meri jaan hai, Zoya. Forever ❤️</div></div>
+<div class="note" onclick="openNote(this)"><b>🌙 Good Night</b><br><span>Tap me</span><div class="love">Roz raat ko sabse last khayal tu hi hoti hai ❤️</div></div>
+<div class="note" onclick="openNote(this)"><b>😘 Miss You</b><br><span>Tap me</span><div class="love">Har second tujhe miss karta hu, Zoya 🥺</div></div>
+<div class="note" onclick="openNote(this)"><b>🍔 Khana Khaya?</b><br><span>Tap me</span><div class="love">Apna khayal rakha kar, meri jaan ❤️</div></div>
+<div class="note" onclick="openNote(this)"><b>🌸 Cute Ho</b><br><span>Tap me</span><div class="love">Tu duniya ki sabse cute ladki hai 😍</div></div>
+<div class="note" onclick="openNote(this)"><b>🤞 Promise</b><br><span>Tap me</span><div class="love">Kabhi akela nahi chodunga, hamesha saath ❤️</div></div>
+<div class="note" onclick="openNote(this)"><b>💖 My Jaan</b><br><span>Tap me</span><div class="love">Tu meri jaan hai, Zoya. Forever ❤️</div></div>
 </div>
 </div>
 
 <div class="card" style="text-align:center"><p style="font-family:'Dancing Script',cursive;color:#ff2e63;font-size:24px">I Love You Zoya ❤️</p><p style="font-size:10px;opacity:.5;margin-top:6px">Made with love - 1.3km to 1100km, same love</p></div>
-</div>
 </div>
 
 <script>
@@ -71,7 +66,10 @@ b.onclick=()=>{
  if(p.value==='zoya@'){lock.style.display='none';app.style.display='block';startSlider();hearts();}
  else alert('password: zoya@');
 };
-function openNote(el){ el.classList.toggle('open'); }
+function openNote(el){
+ el.classList.toggle('open');
+ if(el.classList.contains('open')){el.style.animation='blink.4s ease 2'; setTimeout(()=>el.style.animation='',800)}
+}
 let idx=0;
 function startSlider(){
  const imgs=document.querySelectorAll('#slider img');
@@ -79,7 +77,7 @@ function startSlider(){
   imgs[idx].classList.remove('active');
   idx=(idx+1)%imgs.length;
   imgs[idx].classList.add('active');
- },2800);
+ },2500);
 }
 function hearts(){setInterval(()=>{let h=document.createElement('div');h.className='heart';h.innerHTML='❤️';h.style.left=Math.random()*100+'vw';h.style.fontSize=(12+Math.random()*12)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),4000)},500)}
 </script>
