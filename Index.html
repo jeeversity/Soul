@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kota ❤️ Bihar - For Zoya</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:#fff0f5;overflow:hidden}
+#passScreen{position:fixed;inset:0;background:linear-gradient(135deg,#ff2e63,#ff8fab);display:flex;align-items:center;justify-content:center;z-index:9999}
+.box{background:white;padding:35px;border-radius:24px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.25);width:90%;max-width:340px}
+.box h2{font-family:'Dancing Script',cursive;font-size:34px;color:#ff2e63;margin-bottom:15px}
+.box input{width:100%;padding:12px;border:2px solid #ffd1dc;border-radius:30px;outline:none;text-align:center;font-size:16px}
+.box button{margin-top:15px;width:100%;padding:12px;background:#ff2e63;color:white;border:none;border-radius:30px;font-weight:600;cursor:pointer}
+#main{display:none;height:100vh;flex-direction:column}
+.header{padding:18px;text-align:center;background:white;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.header h1{font-family:'Dancing Script',cursive;color:#ff2e63;font-size:36px}
+.header p{font-size:13px;opacity:0.7;margin-top:4px}
+#map{flex:1;width:100%;z-index:1}
+.info{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:white;padding:12px 20px;border-radius:30px;box-shadow:0 8px 30px rgba(0,0,0,0.15);z-index:400;display:flex;gap:15px;align-items:center;font-size:13px;font-weight:600;white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;background:#ff2e63;display:inline-block}
+.heart{position:fixed;animation:float 4s linear infinite;pointer-events:none;z-index:500}
+@keyframes float{0%{transform:translateY(110vh)}100%{transform:translateY(-10vh)}}
+</style>
+</head>
+<body>
+<div id="passScreen"><div class="box"><h2>Our Secret ❤️</h2><input id="passInput" type="password" placeholder="Enter password"><button id="passBtn">Unlock Surprise</button><p style="margin-top:10px;font-size:12px;opacity:0.6">Hint: zoya@</p></div></div>
+
+<div id="main">
+<div class="header"><h1>Kota ❤️ Bihar</h1><p>Vigyan Nagar se Purnea tak - har mod pe bas tu ❤️</p></div>
+<div id="map"></div>
+<div class="info"><span><span class="dot"></span> Kota, Rajasthan</span><span style="opacity:0.3">→</span><span><span class="dot" style="background:#7c3aed"></span> Purnea, Bihar</span></div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const passScreen=document.getElementById('passScreen'), main=document.getElementById('main');
+document.getElementById('passBtn').onclick=()=>{
+  if(document.getElementById('passInput').value==='zoya@'){
+    passScreen.style.display='none'; main.style.display='flex';
+    initMap(); startHearts();
+  }else alert('Wrong password - zoya@');
+};
+
+function startHearts(){setInterval(()=>{const d=document.createElement('div');d.className='heart';d.innerHTML='❤️';d.style.left=Math.random()*100+'vw';d.style.fontSize=(16+Math.random()*14)+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),4000)},350)}
+
+function initMap(){
+  const map=L.map('map').setView([25.6,81.6],5);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+  const icon=L.divIcon({html:'<div style="font-size:28px">❤️</div>',className:'',iconSize:[30,30],iconAnchor:[15,15]});
+
+  const kota=[25.18,75.83];
+  const bihar=[25.78,87.47];
+
+  L.marker(kota,{icon}).addTo(map).bindPopup('<b>Kota</b><br>Vigyan Nagar, Rajasthan ❤️').openPopup();
+  L.marker(bihar,{icon}).addTo(map).bindPopup('<b>Purnea, Bihar</b><br>Your City ❤️');
+
+  // Ghuma-fira wala rasta - curved + zigzag logic
+  const route=[];
+  const steps=120;
+  for(let i=0;i<=steps;i++){
+    const t=i/steps;
+    let lat = kota[0] + (bihar[0]-kota[0])*t;
+    let lng = kota[1] + (bihar[1]-kota[1])*t;
+    // curve + ghumav
+    const curve = Math.sin(Math.PI*t) * 1.8; // upar ki taraf curve
+    const zigzag = Math.sin(t*12) * 0.15 * Math.sin(Math.PI*t); // halka tedha-medha
+    lat += curve + zigzag;
+    route.push([lat,lng]);
+  }
+  L.polyline(route,{color:'#ff2e63',weight:5,opacity:0.9,lineCap:'round',lineJoin:'round'}).addTo(map);
+  // glow layer
+  L.polyline(route,{color:'#ff8fab',weight:10,opacity:0.3}).addTo(map);
+
+  map.fitBounds([kota,bihar],{padding:[60,60]});
+}
+</script>
+</body>
+</html>
