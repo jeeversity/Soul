@@ -1,93 +1,380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Zoya ❤️</title>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Montserrat',sans-serif;background:#fff5f8;overflow-x:hidden}
-#lock{position:fixed;inset:0;background:#ff2e63;display:flex;align-items:center;justify-content:center;z-index:9999}
-.box{background:white;padding:35px;border-radius:25px;text-align:center;width:90%;max-width:320px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
-.box h1{font-family:'Dancing Script',cursive;color:#ff2e63;font-size:36px}
-.box input{width:100%;padding:12px;border:2px solid #ffd1dc;border-radius:30px;text-align:center;margin-top:12px;outline:none}
-.box button{width:100%;padding:12px;background:#ff2e63;color:white;border:none;border-radius:30px;margin-top:12px;font-weight:600;cursor:pointer}
-#app{display:none;max-width:420px;margin:0 auto;padding:18px}
-.hero-photo{width:100%;height:520px;border-radius:30px;overflow:hidden;position:relative;box-shadow:0 15px 40px rgba(255,46,99,.25);background:#ffe4ea}
-.hero-photo img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity 1.5s ease}
-.hero-photo img.active{opacity:1}
-.name-tag{position:absolute;bottom:14px;left:14px;right:14px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);padding:14px;border-radius:18px;text-align:center}
-.name-tag h2{font-family:'Dancing Script',cursive;color:#ff2e63;font-size:28px}
-.card{background:white;border-radius:22px;padding:20px;margin-top:18px;box-shadow:0 8px 30px rgba(0,0,0,.05)}
-.card h2{font-family:'Dancing Script',cursive;color:#ff2e63;text-align:center;font-size:30px;margin-bottom:10px}
-.letter{font-size:13.5px;line-height:1.7;color:#555;text-align:center}
-.notes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.note{background:#fff0f3;border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden;border:1.5px solid #ffd1dc;min-height:95px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.note:active{transform:scale(.95)}
-.note b{color:#ff2e63;font-size:13px}
-.note span{font-size:11px;opacity:.7}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* FIXED - ab pehle se show nahi hoga */
-.note.love{
-  position:absolute;inset:0;background:#ff2e63;color:white;
-  display:flex;align-items:center;justify-content:center;
-  padding:12px;font-size:12px;font-weight:600;border-radius:16px;
-  opacity:0;transform:scale(.8);transition:.4s;pointer-events:none
-}
-.note.open.love{
-  opacity:1;transform:scale(1);animation:blink.5s ease 2
-}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.heart{position:fixed;animation:float 4s linear forwards;pointer-events:none;z-index:100}
-@keyframes float{0%{transform:translateY(100vh)}100%{transform:translateY(-10vh);opacity:0}}
-</style>
+  <title>OnlyForYou</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 35%, #242424 0%, #0d0d0d 35%, #000 75%);
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Stars */
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    /* Main */
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      width: min(430px, 100%);
+      text-align: center;
+      padding: 45px 30px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 25px;
+      background: rgba(255,255,255,0.045);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 50px rgba(255,255,255,0.05);
+      animation: appear 1.2s ease;
+    }
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .lock {
+      font-size: 42px;
+      margin-bottom: 18px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .small-title {
+      font-size: 11px;
+      letter-spacing: 5px;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(40px, 11vw, 62px);
+      font-weight: 300;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    h1 span {
+      background: linear-gradient(90deg, #fff, #aaa, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: #999;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .password-box {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      outline: none;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    input::placeholder {
+      color: #666;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .unlock {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      background: white;
+      color: black;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .unlock:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.12);
+    }
+
+    #message {
+      min-height: 20px;
+      margin-top: 15px;
+      color: #888;
+      font-size: 12px;
+    }
+
+    /* Welcome screen */
+    #welcome {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      background: #000;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 25px;
+    }
+
+    .welcome-content {
+      max-width: 650px;
+      animation: welcome 1.5s ease;
+    }
+
+    @keyframes welcome {
+      from {
+        opacity: 0;
+        transform: scale(0.92);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .welcome-small {
+      color: #777;
+      font-size: 11px;
+      letter-spacing: 6px;
+      margin-bottom: 20px;
+    }
+
+    .welcome-title {
+      font-size: clamp(48px, 13vw, 90px);
+      font-weight: 200;
+      letter-spacing: -4px;
+      margin-bottom: 20px;
+    }
+
+    .welcome-text {
+      color: #999;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    .enter-btn {
+      padding: 15px 35px;
+      border-radius: 50px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .enter-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255,255,255,0.15);
+    }
+
+    /* Mobile */
+    @media (max-width: 500px) {
+      .card {
+        padding: 38px 22px;
+      }
+
+      .password-box {
+        display: block;
+      }
+
+      input {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div id="lock"><div class="box"><h1>For Zoya ❤️</h1><p style="font-size:12px;opacity:.6;margin-top:6px">Our secret</p><input id="p" type="password" placeholder="zoya@"><button id="b">Unlock My Heart 🔓</button></div></div>
 
-<div id="app">
-<div class="hero-photo" id="slider">
-<img src="1.jpg" class="active" onerror="this.src='https://picsum.photos/500/700?random=1'">
-<img src="2.jpg" onerror="this.src='https://picsum.photos/500/700?random=2'">
-<img src="3.jpg" onerror="this.src='https://picsum.photos/500/700?random=3'">
-<img src="4.jpg" onerror="this.src='https://picsum.photos/500/700?random=4'">
-<div class="name-tag"><h2>My Zoya ❤️</h2><p style="font-size:11px;opacity:.7">Tu hai toh har din khaas hai</p></div>
-</div>
+  <!-- Stars -->
+  <div class="stars">
+    <div class="star" style="top:12%;left:18%;animation-delay:.3s"></div>
+    <div class="star" style="top:24%;left:80%;animation-delay:1s"></div>
+    <div class="star" style="top:70%;left:12%;animation-delay:1.5s"></div>
+    <div class="star" style="top:82%;left:85%;animation-delay:.7s"></div>
+    <div class="star" style="top:40%;left:92%;animation-delay:2s"></div>
+    <div class="star" style="top:15%;left:55%;animation-delay:1.2s"></div>
+    <div class="star" style="top:88%;left:45%;animation-delay:.4s"></div>
+    <div class="star" style="top:55%;left:5%;animation-delay:2.2s"></div>
+  </div>
 
-<div class="card"><h2>Small Letter For You</h2><p class="letter">Zoya,<br><br>Zyada bada nahi likhunga, bas itna ki tu meri zindagi ki sabse khoobsurat wajah hai. Teri ek smile pe din ban jaata hai. Kota se Bihar tak ka faasla bhi kam lagta hai jab tu paas hoti hai.<br><br><b style="color:#ff2e63">Hamesha tera wala ❤️</b></p></div>
+  <!-- Password Screen -->
+  <main class="container" id="loginScreen">
 
-<div class="card"><h2>Tap My Heart Notes 💌</h2><p style="text-align:center;font-size:11px;opacity:.6;margin-bottom:10px">Har note pe click kar, blink hoke love khulega</p>
-<div class="notes">
-<div class="note" onclick="openNote(this)"><div><b>🌙 Good Night</b><br><span>Tap me</span></div><div class="love">Roz raat ko sabse last khayal tu hi hoti hai ❤️</div></div>
-<div class="note" onclick="openNote(this)"><div><b>😘 Miss You</b><br><span>Tap me</span></div><div class="love">Har second tujhe miss karta hu, Zoya 🥺</div></div>
-<div class="note" onclick="openNote(this)"><div><b>🍔 Khana Khaya?</b><br><span>Tap me</span></div><div class="love">Apna khayal rakha kar, meri jaan ❤️</div></div>
-<div class="note" onclick="openNote(this)"><div><b>🌸 Cute Ho</b><br><span>Tap me</span></div><div class="love">Tu duniya ki sabse cute ladki hai 😍</div></div>
-<div class="note" onclick="openNote(this)"><div><b>🤞 Promise</b><br><span>Tap me</span></div><div class="love">Kabhi akela nahi chodunga, hamesha saath ❤️</div></div>
-<div class="note" onclick="openNote(this)"><div><b>💖 My Jaan</b><br><span>Tap me</span></div><div class="love">Tu meri jaan hai, Zoya. Forever ❤️</div></div>
-</div>
-</div>
+    <div class="card">
 
-<div class="card" style="text-align:center"><p style="font-family:'Dancing Script',cursive;color:#ff2e63;font-size:24px">I Love You Zoya ❤️</p><p style="font-size:10px;opacity:.5;margin-top:6px">Made with love - 1.3km to 1100km, same love</p></div>
-</div>
+      <div class="lock">🔐</div>
 
-<script>
-b.onclick=()=>{
- if(p.value==='zoya@'){lock.style.display='none';app.style.display='block';startSlider();hearts();}
- else alert('password: zoya@');
-};
-function openNote(el){
- el.classList.toggle('open');
-}
-let idx=0;
-function startSlider(){
- const imgs=document.querySelectorAll('#slider img');
- setInterval(()=>{
-  imgs[idx].classList.remove('active');
-  idx=(idx+1)%imgs.length;
-  imgs[idx].classList.add('active');
- },2500);
-}
-function hearts(){setInterval(()=>{let h=document.createElement('div');h.className='heart';h.innerHTML='❤️';h.style.left=Math.random()*100+'vw';h.style.fontSize=(12+Math.random()*12)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),4000)},500)}
-</script>
+      <div class="small-title">
+        PRIVATE SPACE
+      </div>
+
+      <h1>
+        <span>OnlyForYou</span>
+      </h1>
+
+      <p class="subtitle">
+        Some things are not meant for everyone.<br>
+        This little place is just for you.
+      </p>
+
+      <div class="password-box">
+        <input
+          type="password"
+          id="password"
+          placeholder="Enter the secret password"
+          autocomplete="off"
+        >
+      </div>
+
+      <button class="unlock" onclick="unlock()">
+        UNLOCK ✨
+      </button>
+
+      <p id="message"></p>
+
+    </div>
+
+  </main>
+
+
+  <!-- Welcome Screen -->
+  <section id="welcome">
+
+    <div class="welcome-content">
+
+      <div class="welcome-small">
+        ACCESS GRANTED
+      </div>
+
+      <h2 class="welcome-title">
+        OnlyForYou
+      </h2>
+
+      <p class="welcome-text">
+        Welcome to a little corner of the internet<br>
+        that was made especially for you.
+      </p>
+
+      <button class="enter-btn" onclick="enterWebsite()">
+        ENTER →
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <script>
+
+    // CHANGE PASSWORD HERE
+    const SECRET_PASSWORD = "onlyforyou";
+
+    function unlock() {
+
+      const input = document.getElementById("password");
+      const message = document.getElementById("message");
+
+      if (input.value === SECRET_PASSWORD) {
+
+        message.innerText = "Access granted ✨";
+
+        setTimeout(() => {
+
+          document.getElementById("loginScreen").style.display = "none";
+          document.getElementById("welcome").style.display = "flex";
+
+        }, 600);
+
+      } else {
+
+        message.innerText = "Hmm... that's not the secret 👀";
+
+        input.value = "";
+
+      }
+    }
+
+    function enterWebsite() {
+
+      alert("Next chapter coming soon ✨");
+
+    }
+
+    // Press Enter to unlock
+    document.getElementById("password").addEventListener("keydown", function(event) {
+
+      if (event.key === "Enter") {
+        unlock();
+      }
+
+    });
+
+  </script>
+
 </body>
 </html>
