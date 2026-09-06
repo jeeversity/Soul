@@ -1,380 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>OnlyForYou</title>
+<title>OnlyForYou</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#050505;
+    color:white;
+}
+
+/* ================= PASSWORD SCREEN ================= */
+
+#loginScreen{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    background:
+    radial-gradient(circle at center,#242424 0%,#0b0b0b 45%,#000 100%);
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+    text-align:center;
+    padding:45px 30px;
+    border:1px solid #292929;
+    border-radius:25px;
+    background:rgba(255,255,255,.04);
+    backdrop-filter:blur(15px);
+    box-shadow:0 0 60px rgba(255,255,255,.04);
+}
+
+.lock{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.private{
+    font-size:10px;
+    letter-spacing:5px;
+    color:#777;
+    margin-bottom:15px;
+}
+
+.login-card h1{
+    font-size:50px;
+    font-weight:300;
+    margin-bottom:15px;
+}
+
+.login-card p{
+    color:#888;
+    line-height:1.7;
+    font-size:14px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin-top:25px;
+    border-radius:12px;
+    border:1px solid #292929;
+    background:#090909;
+    color:white;
+    outline:none;
+    text-align:center;
+}
+
+.unlock{
+    width:100%;
+    padding:15px;
+    margin-top:10px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:white;
+    color:black;
+    font-weight:bold;
+}
+
+#message{
+    margin-top:15px;
+    font-size:12px;
+}
+
+/* ================= WELCOME ================= */
+
+#welcome{
+    display:none;
+    min-height:100vh;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:25px;
+    background:#000;
+}
+
+.welcome-content{
+    animation:fadeIn 1.5s ease;
+}
+
+.welcome-content small{
+    color:#777;
+    letter-spacing:6px;
+}
+
+.welcome-content h2{
+    font-size:clamp(50px,12vw,100px);
+    font-weight:200;
+    margin:20px 0;
+}
+
+.welcome-content p{
+    color:#888;
+    line-height:1.8;
+}
+
+.enter-btn{
+    margin-top:35px;
+    padding:15px 35px;
+    border:1px solid #444;
+    border-radius:50px;
+    background:white;
+    color:black;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* ================= MAIN WEBSITE ================= */
+
+#mainWebsite{
+    display:none;
+    background:#050505;
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(12px);
+    z-index:100;
+}
+
+.logo{
+    font-size:18px;
+    letter-spacing:2px;
+}
+
+nav a{
+    color:#aaa;
+    text-decoration:none;
+    margin-left:25px;
+    font-size:13px;
+}
+
+nav a:hover{
+    color:white;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:100px 20px;
+    background:
+    radial-gradient(circle at center,#191919,#050505 60%,#000);
+}
+
+.hero-content{
+    max-width:800px;
+}
+
+.hero small{
+    color:#777;
+    letter-spacing:6px;
+}
+
+.hero h1{
+    font-size:clamp(55px,12vw,120px);
+    font-weight:200;
+    margin:20px 0;
+}
+
+.hero p{
+    color:#888;
+    font-size:16px;
+    line-height:1.9;
+}
+
+.scroll{
+    margin-top:60px;
+    color:#555;
+    font-size:11px;
+    letter-spacing:4px;
+}
+
+/* SECTIONS */
+
+section.content{
+    padding:110px 8%;
+    max-width:1100px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.section-title small{
+    color:#666;
+    letter-spacing:4px;
+}
+
+.section-title h2{
+    font-size:42px;
+    font-weight:300;
+    margin-top:15px;
+}
+
+/* MESSAGE */
+
+.message-box{
+    max-width:750px;
+    margin:auto;
+    padding:45px;
+    border:1px solid #222;
+    border-radius:25px;
+    background:#0a0a0a;
+    text-align:center;
+}
+
+.message-box p{
+    color:#aaa;
+    line-height:2;
+    font-size:16px;
+}
+
+/* MEMORY CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.card{
+    min-height:230px;
+    padding:30px;
+    border:1px solid #222;
+    border-radius:20px;
+    background:linear-gradient(145deg,#111,#080808);
+    transition:.4s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#444;
+}
+
+.card .icon{
+    font-size:32px;
+    margin-bottom:25px;
+}
+
+.card h3{
+    font-weight:400;
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#777;
+    line-height:1.7;
+    font-size:13px;
+}
+
+/* QUOTE */
+
+.quote{
+    text-align:center;
+    padding:130px 20px;
+    background:#080808;
+}
+
+.quote h2{
+    max-width:750px;
+    margin:auto;
+    font-size:clamp(28px,5vw,48px);
+    font-weight:300;
+    line-height:1.5;
+}
+
+.quote p{
+    margin-top:25px;
+    color:#666;
+}
+
+/* FINAL */
+
+.final{
+    min-height:80vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:50px 20px;
+}
+
+.final-content h2{
+    font-size:clamp(45px,9vw,80px);
+    font-weight:200;
+}
+
+.final-content p{
+    color:#777;
+    margin:20px 0 35px;
+}
+
+.surprise{
+    padding:16px 30px;
+    border-radius:50px;
+    background:white;
+    color:black;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:30px;
+    border-top:1px solid #151515;
+    color:#444;
+    font-size:12px;
+}
+
+/* ANIMATION */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    nav{
+        padding:18px 5%;
     }
 
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at 50% 35%, #242424 0%, #0d0d0d 35%, #000 75%);
-      color: white;
-      overflow: hidden;
+    nav a{
+        margin-left:10px;
+        font-size:11px;
     }
 
-    /* Stars */
-    .stars {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
+    .cards{
+        grid-template-columns:1fr;
     }
 
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      opacity: 0.6;
-      animation: twinkle 3s infinite ease-in-out;
+    section.content{
+        padding:80px 6%;
     }
 
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
+    .message-box{
+        padding:30px 20px;
     }
 
-    /* Main */
-    .container {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .card {
-      width: min(430px, 100%);
-      text-align: center;
-      padding: 45px 30px;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 25px;
-      background: rgba(255,255,255,0.045);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 50px rgba(255,255,255,0.05);
-      animation: appear 1.2s ease;
-    }
-
-    @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(25px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .lock {
-      font-size: 42px;
-      margin-bottom: 18px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-7px); }
-    }
-
-    .small-title {
-      font-size: 11px;
-      letter-spacing: 5px;
-      color: #aaa;
-      margin-bottom: 16px;
-    }
-
-    h1 {
-      font-size: clamp(40px, 11vw, 62px);
-      font-weight: 300;
-      letter-spacing: -2px;
-      margin-bottom: 12px;
-    }
-
-    h1 span {
-      background: linear-gradient(90deg, #fff, #aaa, #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .subtitle {
-      color: #999;
-      font-size: 14px;
-      line-height: 1.7;
-      margin-bottom: 30px;
-    }
-
-    .password-box {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 15px;
-    }
-
-    input {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-      outline: none;
-      background: rgba(0,0,0,0.4);
-      color: white;
-      text-align: center;
-      font-size: 14px;
-    }
-
-    input::placeholder {
-      color: #666;
-    }
-
-    button {
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .unlock {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      background: white;
-      color: black;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .unlock:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(255,255,255,0.12);
-    }
-
-    #message {
-      min-height: 20px;
-      margin-top: 15px;
-      color: #888;
-      font-size: 12px;
-    }
-
-    /* Welcome screen */
-    #welcome {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 10;
-      background: #000;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 25px;
-    }
-
-    .welcome-content {
-      max-width: 650px;
-      animation: welcome 1.5s ease;
-    }
-
-    @keyframes welcome {
-      from {
-        opacity: 0;
-        transform: scale(0.92);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .welcome-small {
-      color: #777;
-      font-size: 11px;
-      letter-spacing: 6px;
-      margin-bottom: 20px;
-    }
-
-    .welcome-title {
-      font-size: clamp(48px, 13vw, 90px);
-      font-weight: 200;
-      letter-spacing: -4px;
-      margin-bottom: 20px;
-    }
-
-    .welcome-text {
-      color: #999;
-      font-size: 15px;
-      line-height: 1.8;
-      margin-bottom: 35px;
-    }
-
-    .enter-btn {
-      padding: 15px 35px;
-      border-radius: 50px;
-      background: white;
-      color: black;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .enter-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 35px rgba(255,255,255,0.15);
-    }
-
-    /* Mobile */
-    @media (max-width: 500px) {
-      .card {
-        padding: 38px 22px;
-      }
-
-      .password-box {
-        display: block;
-      }
-
-      input {
-        margin-bottom: 10px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <!-- Stars -->
-  <div class="stars">
-    <div class="star" style="top:12%;left:18%;animation-delay:.3s"></div>
-    <div class="star" style="top:24%;left:80%;animation-delay:1s"></div>
-    <div class="star" style="top:70%;left:12%;animation-delay:1.5s"></div>
-    <div class="star" style="top:82%;left:85%;animation-delay:.7s"></div>
-    <div class="star" style="top:40%;left:92%;animation-delay:2s"></div>
-    <div class="star" style="top:15%;left:55%;animation-delay:1.2s"></div>
-    <div class="star" style="top:88%;left:45%;animation-delay:.4s"></div>
-    <div class="star" style="top:55%;left:5%;animation-delay:2.2s"></div>
-  </div>
 
-  <!-- Password Screen -->
-  <main class="container" id="loginScreen">
+<!-- ================= LOGIN ================= -->
 
-    <div class="card">
+<div id="loginScreen">
 
-      <div class="lock">🔐</div>
+    <div class="login-card">
 
-      <div class="small-title">
-        PRIVATE SPACE
-      </div>
+        <div class="lock">🔐</div>
 
-      <h1>
-        <span>OnlyForYou</span>
-      </h1>
+        <div class="private">
+            PRIVATE SPACE
+        </div>
 
-      <p class="subtitle">
-        Some things are not meant for everyone.<br>
-        This little place is just for you.
-      </p>
+        <h1>OnlyForYou</h1>
 
-      <div class="password-box">
+        <p>
+            Some things are not meant for everyone.<br>
+            This little place is just for you.
+        </p>
+
         <input
-          type="password"
-          id="password"
-          placeholder="Enter the secret password"
-          autocomplete="off"
+            type="password"
+            id="password"
+            placeholder="Enter secret password"
         >
-      </div>
 
-      <button class="unlock" onclick="unlock()">
-        UNLOCK ✨
-      </button>
+        <button class="unlock" onclick="unlock()">
+            UNLOCK ✨
+        </button>
 
-      <p id="message"></p>
+        <div id="message"></div>
 
     </div>
 
-  </main>
+</div>
 
 
-  <!-- Welcome Screen -->
-  <section id="welcome">
+<!-- ================= WELCOME ================= -->
+
+<div id="welcome">
 
     <div class="welcome-content">
 
-      <div class="welcome-small">
-        ACCESS GRANTED
-      </div>
+        <small>ACCESS GRANTED</small>
 
-      <h2 class="welcome-title">
-        OnlyForYou
-      </h2>
+        <h2>OnlyForYou</h2>
 
-      <p class="welcome-text">
-        Welcome to a little corner of the internet<br>
-        that was made especially for you.
-      </p>
+        <p>
+            Welcome to a little corner of the internet<br>
+            made especially for you.
+        </p>
 
-      <button class="enter-btn" onclick="enterWebsite()">
-        ENTER →
-      </button>
+        <button class="enter-btn" onclick="enterWebsite()">
+            ENTER →
+        </button>
 
     </div>
 
-  </section>
+</div>
 
 
-  <script>
+<!-- ================= MAIN WEBSITE ================= -->
 
-    // CHANGE PASSWORD HERE
-    const SECRET_PASSWORD = "onlyforyou";
+<div id="mainWebsite">
 
-    function unlock() {
+    <!-- NAVBAR -->
 
-      const input = document.getElementById("password");
-      const message = document.getElementById("message");
+    <nav>
 
-      if (input.value === SECRET_PASSWORD) {
+        <div class="logo">
+            OnlyForYou.
+        </div>
+
+        <div>
+            <a href="#home">Home</a>
+            <a href="#message-section">Message</a>
+            <a href="#memories">Memories</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <div class="hero" id="home">
+
+        <div class="hero-content">
+
+            <small>A LITTLE PLACE</small>
+
+            <h1>OnlyForYou</h1>
+
+            <p>
+                Not everything needs a reason.<br>
+                Some things are simply worth creating.
+            </p>
+
+            <div class="scroll">
+                SCROLL TO EXPLORE ↓
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    <section class="content" id="message-section">
+
+        <div class="section-title">
+
+            <small>WORDS</small>
+
+            <h2>A Little Message</h2>
+
+        </div>
+
+        <div class="message-box">
+
+            <p>
+                I don't really know how to put everything into words,
+                so I decided to create a little place instead.
+                <br><br>
+                Every small detail here has a reason.
+                Maybe someday I'll tell you all of them.
+                <br><br>
+                Until then, just know that this page exists
+                because you are someone worth making it for.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- MEMORIES -->
+
+    <section class="content" id="memories">
+
+        <div class="section-title">
+
+            <small>THE LITTLE THINGS</small>
+
+            <h2>Things That Matter</h2>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="icon">✨</div>
+
+                <h3>The Beginning</h3>
+
+                <p>
+                    Every story has a beginning.
+                    Maybe this is just another little chapter.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🌙</div>
+
+                <h3>Little Moments</h3>
+
+                <p>
+                    Sometimes the smallest moments
+                    become the ones we remember.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="icon">🤍</div>
+
+                <h3>Something Special</h3>
+
+                <p>
+                    Some people simply make ordinary
+                    moments feel a little different.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUOTE -->
+
+    <div class="quote">
+
+        <h2>
+            "Maybe this isn't just a website.
+            Maybe it's a tiny reminder."
+        </h2>
+
+        <p>
+            — made only for you
+        </p>
+
+    </div>
+
+
+    <!-- FINAL -->
+
+    <div class="final">
+
+        <div class="final-content">
+
+            <h2>
+                One Last Thing.
+            </h2>
+
+            <p>
+                There's still a little surprise waiting here.
+            </p>
+
+            <button class="surprise" onclick="surprise()">
+                OPEN SURPRISE ✨
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+        Made with ✨ · OnlyForYou
+    </footer>
+
+</div>
+
+
+<script>
+
+/* ================= PASSWORD ================= */
+
+const SECRET_PASSWORD = "onlyforyou";
+
+function unlock(){
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+    if(password === SECRET_PASSWORD){
 
         message.innerText = "Access granted ✨";
 
-        setTimeout(() => {
+        setTimeout(function(){
 
-          document.getElementById("loginScreen").style.display = "none";
-          document.getElementById("welcome").style.display = "flex";
+            document.getElementById("loginScreen")
+            .style.display = "none";
 
-        }, 600);
+            document.getElementById("welcome")
+            .style.display = "flex";
 
-      } else {
-
-        message.innerText = "Hmm... that's not the secret 👀";
-
-        input.value = "";
-
-      }
-    }
-
-    function enterWebsite() {
-
-      alert("Next chapter coming soon ✨");
+        },700);
 
     }
 
-    // Press Enter to unlock
-    document.getElementById("password").addEventListener("keydown", function(event) {
+    else{
 
-      if (event.key === "Enter") {
+        message.innerText =
+            "Wrong password... try again 👀";
+
+    }
+
+}
+
+
+/* ENTER WEBSITE */
+
+function enterWebsite(){
+
+    document.getElementById("welcome")
+    .style.display = "none";
+
+    document.getElementById("mainWebsite")
+    .style.display = "block";
+
+    document.body.style.overflow = "auto";
+
+}
+
+
+/* SURPRISE */
+
+function surprise(){
+
+    alert(
+        "✨ This is just the beginning...\n\nMore surprises coming soon."
+    );
+
+}
+
+
+/* ENTER KEY */
+
+document
+.getElementById("password")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
         unlock();
-      }
+    }
 
-    });
+});
 
-  </script>
+</script>
 
 </body>
 </html>
